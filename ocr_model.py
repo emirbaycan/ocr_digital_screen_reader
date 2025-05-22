@@ -50,7 +50,10 @@ class OCRDataset(Dataset):
         with open(dataset_file, "r") as f:
             for line in f.readlines():
                 img_path, label = line.strip().split(" ", 1)
-                self.samples.append((img_path, label))
+                if os.path.exists(img_path):
+                    self.samples.append((img_path, label))
+                else:
+                    print(f"⚠ Skipping missing image: {img_path}")
         self.target_size = target_size
 
     def __len__(self):
@@ -166,6 +169,3 @@ if __name__ == "__main__":
 
     torch.save(model.state_dict(), "ocr_crnn.pth")
     print("✅ OCR Model trained and saved as ocr_crnn.pth")
-
-if __name__ == "__main__":
-    print(f"🔢 Num Classes: {num_classes}")  # ✅ Only print when directly executed

@@ -17,7 +17,7 @@ port = "554"
 rtsp_url = "rtsp://" + username + ":" + password + "@" + ip + ":" + port + "/onvif1"
 
 # Load YOLOv8 model
-model = YOLO("runs/detect/train10/weights/best.pt")
+model = YOLO("best.pt")
 model.overrides["verbose"] = False
 
 # Load OCR model
